@@ -1,11 +1,11 @@
 # Welcome to the Prisma Technical Writer assignment
 
-We're extensively using GitHub and Markdown for colaborating our docs.
+We're extensively using GitHub and Markdown for collaborating our docs.
 This assignment will hopefully help you get a glimpse at what part of your day to day will involve.
 
 ## Task
 
-Your goal is to propose a tutorial about **database seeding to Node.js developers who work with PostgreSQL databases**.
+Your goal is to create a tutorial about **database seeding for Node.js developers who work with PostgreSQL databases**.
 This tutorial should cover:
  * What seeding is about and in which situations it is usually considered useful
  * An example of a seeding script using any Node.js Postgres client, such as [node-postgres](https://node-postgres.com/), or anything else you feel comfortable with **except Prisma** (we want to reduce potential bias in our evaluation)
