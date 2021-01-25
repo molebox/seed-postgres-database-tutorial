@@ -6,10 +6,10 @@ This assignment will hopefully help you get a glimpse at what part of your day t
 ## Task
 
 Your goal is to create a tutorial about **database seeding for Node.js developers who work with PostgreSQL databases**.
-This tutorial should cover:
- * What seeding is about and in which situations it is usually considered useful
- * An example of a seeding script using any Node.js Postgres client, such as [node-postgres](https://node-postgres.com/), or anything else you feel comfortable with **except Prisma** (we want to reduce potential bias in our evaluation)
- * Instructions to use the example and run it
+The tutorial should include:
+ * A conceptual overview of database seeding, including when and why to use it
+ * A working example of a seeding script using any Node.js Postgres client, such as [node-postgres](https://node-postgres.com/), or anything else you feel comfortable with **except Prisma** (we want to reduce potential bias in our evaluation)
+ * Instructions on how to use the example and run it
  * Pros and cons of the approach and conclusion
 
 ## Format
