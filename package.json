@@ -1,0 +1,11 @@
+{
+  "name": "tech-writer-task-template",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "repository": "git@github.com:prisma/tech-writer-task-template.git",
+  "author": "Prisma <team@prisma.io>",
+  "license": "MIT",
+  "scripts": {
+    "seed": "node src/main.js"
+  }
+}
