@@ -19,7 +19,8 @@ Once we're in, we would like to be able to clone the repository, navigate to you
 
 ## Material available in this template repository
 
- * A `package.json` and `src/main.js` files that are ready to run.
+ * A `package.json` and `src/main.js` files that are ready to run
+ * A `schema.sql` file you can use to create a basic structure with a single table called "Translations" for your seeding example
  * A `guide.md` meant to contain the guide
  
  Note: feel free to scratch the contents of this README.md file in your own repository!
