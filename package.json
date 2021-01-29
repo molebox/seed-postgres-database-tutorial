@@ -1,11 +1,18 @@
 {
-  "name": "tech-writer-task-template",
+  "name": "seed-postgres-database-tutorial",
   "version": "1.0.0",
   "main": "src/main.js",
-  "repository": "git@github.com:prisma/tech-writer-task-template.git",
-  "author": "Prisma <team@prisma.io>",
+  "repository": "https://github.com/molebox/seed-postgres-database-tutorial",
+  "author": "Rich Haines",
   "license": "MIT",
   "scripts": {
     "seed": "node src/main.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "faker": "^5.2.0",
+    "fast-csv": "^4.3.6",
+    "fs": "^0.0.1-security",
+    "pg": "^8.5.1"
   }
 }
