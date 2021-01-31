@@ -1,10 +1,11 @@
 
--- Seeing as we will be testing out this script alot we can destroy the db before creating everythign again
+-- Seeing as we will be testing out this script alot we can destroy the db before creating everything again
 DROP DATABASE IF EXISTS translationsdb;
 
 -- Create the db
 CREATE DATABASE translationsdb;
 
+-- Move into the db
 \c translationsdb
 
 -- Create our table if it doesn't already exist
@@ -16,6 +17,5 @@ CREATE TABLE IF NOT EXISTS Translations
 );
 
 -- Changes the owner of the table to postgres which is the default when installing postgres
--- Maybe alter this in the script through user input so they can enter their role?
 ALTER TABLE Translations
     OWNER to postgres;

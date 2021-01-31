@@ -6,13 +6,16 @@
   "author": "Rich Haines",
   "license": "MIT",
   "scripts": {
-    "seed": "node src/main.js"
+    "create-db": "psql -U postgres < schema.sql",
+    "seed": "yarn create-db && node src/main.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "faker": "^5.2.0",
     "fast-csv": "^4.3.6",
     "fs": "^0.0.1-security",
-    "pg": "^8.5.1"
+    "minimist": "^1.2.5",
+    "pg": "^8.5.1",
+    "validator": "^13.5.2"
   }
 }

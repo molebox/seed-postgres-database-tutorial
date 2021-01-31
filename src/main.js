@@ -2,6 +2,8 @@ const faker = require('faker');
 const fs = require('fs');
 const fastcsv = require("fast-csv");
 const db = require('./db');
+const contains = require('validator/lib/contains');
+const args = require('minimist')(process.argv.slice(2))
 
 // The path to write the csv file to
 const output = './src/output.csv';
@@ -19,38 +21,39 @@ function createTranslation() {
 }
 
 async function writeToCsvFile() {
-
+    // The user can specify how many rows they want to create (yarn seed --rows=20), if they dont specify anything then defaults to 10
+    let rows = args['rows'] || 10;
     // Iterate x number of times and write a new line to the csv file using the createTranslation function
-    for (let index = 0; index < 10; index++) {
+    for (let index = 0; index < rows; index++) {
       stream.write(createTranslation(), 'utf-8')
     }
     stream.end();
 }
 
-async function example() {
-
-  await writeToCsvFile()
-
-  let stream = fs.createReadStream(output);
+function insertFromCsv() {
   let csvData = [];
-  let csvStream = fastcsv
+  return fastcsv
     .parse()
+    // validate that the column key doesn't contain any commas, as some countries do. This will break our insertion as it would be treated as an extra column and our table expects only 3 columns
+    .validate((data) => !contains(',', data[0]))
     // triggered when a new record is parsed, we then add it to the data array
-    .on("data", function(data) {
+    .on("data", (data) => {
       csvData.push(data);
     })
     // once parsing is finished and all the data is added to the array we can then insert it into the db table
-    .on("end", function() {
-
+    .on("end", () => {
       // The insert statement
       const query = "INSERT INTO translations (key, lang, content) VALUES ($1, $2, $3)";
-
+      // Connect to the db instance
       db.connect((err, client, done) => {
         if (err) throw err;
         try {
+          // loop over the lines stored in the csv file
           csvData.forEach(row => {
+            // For each line we run the insert query with the row providing the column values
             client.query(query, row, (err, res) => {
               if (err) {
+                // We can just console.log any errors
                 console.log(err.stack);
               } else {
                 console.log("inserted " + res.rowCount + " row:", row);
@@ -62,8 +65,12 @@ async function example() {
         }
       });
     });
-
-stream.pipe(csvStream);
 }
 
-example()
+async function seed() {
+  await writeToCsvFile()
+  let stream = fs.createReadStream(output);
+  stream.pipe(insertFromCsv());
+}
+
+seed()

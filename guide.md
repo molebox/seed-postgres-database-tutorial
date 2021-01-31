@@ -15,7 +15,12 @@ The process of seeding (in the context of databases) is to insert or populate th
 
 ## The seed script
 
-...more to follow
+The first iteration will be a node script that will accomplish the following:
+
+- Create a database with a table.
+- Create a csv file and populate it with fake data using the [faker](https://github.com/Marak/Faker.js) library. We'll add 10 records to begin with.
+- Parse that data and insert it into our table - seed the database.
+
 
 
 
