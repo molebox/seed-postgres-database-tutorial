@@ -2,7 +2,7 @@
 
 ## Preamble
 
-This project has a node script for seeding a Postgres database and a tutorial guide for how to write said script.
+This project has a node script for seeding a Postgres database and a tutorial guide for writing the script.
 
 To run the project locally ensure you have [Postgres](https://www.postgresql.org/download/) and [Nodejs](https://nodejs.org/en/download/) installed on your machine. This repo uses versions:
 
@@ -15,6 +15,6 @@ Clone this repository and run `yarn` from the root. This project uses the defaul
 
 Set your environment variables by copying the values from the `.env.example` file into a newly created `.env` file. Change the values to match your local Postgres configuration.
 
-To create the default 10 rows run `yarn seed` from a terminal. To create a custom amount of rows run `yarn seed --rows=x` where `x` is the amount of rows you wish to create.
+To create the default 10 rows run `yarn seed` from a terminal. To create a custom amount of rows run `yarn seed --rows=x` where `x` is the number of rows you wish to create.
 
-Each time the script is run the database is dropped and re-created. To get a detailed run down of how the script works read the `guide.md` file.
+Each time the script is run the database is dropped and re-created. To get a detailed run-down of how the script works read the `guide.md` file.
