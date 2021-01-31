@@ -1,6 +1,6 @@
 # How to seed a Postgres database with node
 
-This short guide will walk through an implementation for seeding a Postgres database. We'll cover the when and why's, create a working example of a seeding script and touch on some of the pros and cons as to the chosen approach.
+This short guide will walk through an implementation for seeding a Postgres database. It will cover the when and why's, create a working example of a seeding script and touch on some of the pros and cons as to the chosen approach.
 
 ## Prerequisites
 
@@ -20,8 +20,8 @@ The process of seeding (in the context of databases) is to insert or populate th
 The seed script will aim to accomplish the following:
 
 - Create a database with a table.
-- Create a csv file and populate it with fake data using the [faker](https://github.com/Marak/Faker.js) library. We'll default to 10 rows but allow the user to specify an amount if they like.
-- Parse that data and insert it into our table - seed the database.
+- Create a csv file and populate it with fake data using the [faker](https://github.com/Marak/Faker.js) library. It will default to 10 rows but allow the user to specify an amount if they like.
+- Parse that data and insert it into the table - seed the database.
 
 Begin by creating a `schema.sql` file at your projects root. This file will enable you to lay the ground work for how your database and it's table will look. 
 
@@ -108,7 +108,7 @@ PGPORT=5432
 
 ### main.js
 
-Everything is in place and the script to seed the database can now be written. In a real world scenario you would perhaps have some data stored in a csv file that would be relevant to your database and application. Our example will make use of the [faker library](https://github.com/Marak/Faker.js), as well as a few others. Install the following:
+Everything is in place and the script to seed the database can now be written. In a real world scenario you would perhaps have some data stored in a csv file that would be relevant to your database and application. This example will make use of the [faker library](https://github.com/Marak/Faker.js), as well as a few others. Install the following:
 
 ```bash
 yarn add dotenv faker fast-csv fs minimist pg validator
@@ -132,13 +132,13 @@ function createTranslation() {
 Next you will need to import fs and create a stream, this will be used to write to an as yet non-existent csv file.
 
 ```js
-const faker = require('faker');
+// other imports..
 const fs = require('fs');
 
 // The path to write the csv file to
 const output = './src/output.csv';
 
-// ...createTranslation() function
+// other functions..
 
 // Create a stream to write to the csv file
 const stream = fs.createWriteStream(output)
@@ -147,10 +147,10 @@ const stream = fs.createWriteStream(output)
 Enabling the user of the script to choose how many rows they would like to seed the database with is and extra and worthwhile step. The minimist package helps with parsing argument options. In the case of the script, it allows the user the option to pass in an amount, if the user chooses not to pass any additional arguments then you can set a default value. Create a new function which will write the fake data to the csv file.
 
 ```js
-const args = require('minimist')(process.argv.slice(2))
 // other imports..
-// other functions...
+const args = require('minimist')(process.argv.slice(2))
 
+// other functions...
 
 async function writeToCsvFile() {
     // The user can specify how many rows they want to create (yarn seed --rows=20), if they dont specify anything (yarn seed) then defaults to 10
@@ -166,10 +166,11 @@ async function writeToCsvFile() {
 Now that the csv file has been created and populated with fake data, you can begin the process of actually seeding that data into the Postgres database. Fast.csv is a library for parsing and formatting csv files. You'll use it in combination with the validator library and node-postgres.
 
 ```js
+// other imports...
 const fastcsv = require("fast-csv");
 const db = require('./db');
 const contains = require('validator/lib/contains');
-// other imports...
+
 // other functions...
 
 function insertFromCsv() {
@@ -259,4 +260,7 @@ select *  from "translations";
 
 ## Final thoughts
 
-There are many ways this could have been accomplished, in fact there are many libraries that support using node with Postgres. This method was chosen for it's relative simplicity. It's not a generic solution which would fit all scenarios but it could most definitely be built upon to incorporate extra features. The function that creates the fake data could for example be added via config to match the schema definition of the table. 
+There are many ways this could have been accomplished, in fact there are many libraries that support using node with Postgres. This method was chosen for it's relative simplicity. It's not a generic solution which would fit all scenarios but it could most definitely be built upon to incorporate extra features. The function that creates the fake data could for example be added via config to match the schema definition of the table, it would also work quite nicely with a CLI, this would enable the end user much more configuration. 
+
+The use of the faker library for this example was befitting, but the data could also have been parsed from an external API. The upside of using the faker library is that it has lots of methods from which to configure the data and of course it means we don't have to actually run an external API request.
+
