@@ -1,6 +1,6 @@
-# How to seed a Postgres database with node
+# How to seed a Postgres database with Node
 
-This short guide will walk through seeding a Postgres database. It will cover creating a working example of a seeding script and touch on some of the pros and cons as to the chosen approach.
+This guide will walk through seeding a Postgres database. It will cover creating a Node script to seed the data, and touch on some of the pros and cons as to the chosen approach.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ This short guide will walk through seeding a Postgres database. It will cover cr
 
 ## What do we mean by seed?
 
-The process of seeding (in the context of databases) is to insert or populate the initial data into the database. This can be either a manual or automated step in the setup of an application. Seeding can also be used when testing different branches, for example, if you have a dev branch where you want to test some new sorting query against the database, seeding would be a good way to test against data that wont affect a production build. Of course, there are many reason one might choose to seed a database. In some instances, an applications database requires some form of data present before it will work properly, such as an admin account. But more often than not the seed would take place pre-install and thus allow the user to begin using the app without any issues.
+The process of seeding (in the context of databases) is to insert or populate the initial data into the database. This can be either a manual or automated step in the setup of an application. Seeding can be used when testing different branches, for example, if you have a dev branch where you want to test some new sorting query against the database, seeding would be a good way to test against data that won't affect a production build. Of course, there are many reason one might choose to seed a database. In some instances, an applications database requires some form of data present before it will work properly, such as an admin account. But more often than not seeding would take place pre-install and thus allow the user to begin using the app without any issues.
 
 ## The seed script
 
@@ -52,7 +52,7 @@ ALTER TABLE Translations
 
 ### db.js
 
-To interact with the Postgres database, you can install the [node-postgres](https://node-postgres.com/) package, a collection of modules made for interacting with Postgres. You'll use it to establish an initial connection to the database and insert some fake data. Create a new file `src/db.js` and add the following:
+To interact with the Postgres database, you can install the [Node-postgres](https://Node-postgres.com/) package, a collection of modules made for interacting with Postgres. You'll use it to establish an initial connection to the database and insert some fake data. Create a new file `src/db.js` and add the following:
 
 ```js
 const { Pool } = require("pg");
@@ -77,11 +77,11 @@ module.exports = {
 };
 ```
 
-The Pool class takes some optional config, the values passed in here enable a connection to be established. They are set as environment variables (env vars) and imported from a separate config file. This file exports two functions. The query, which will be used to query the Postgres database and run an `INSERT` statement, and a connect function which will be used to connect to the database.
+The Pool class takes some optional config and the values passed in enable a connection with the database. They are set as environment variables (env vars) and imported from a separate config file. This file exports two functions. The query, which will be used to query the Postgres database and run an `INSERT` statement, and a connect function which will be used to connect to the database.
 
 ### config.js
 
-Storing all the env vars in one place and exporting them for use is a good way to ensure that you have one source of truth and can easily swap them out from one place instead of multiple files. Create a new file and name it `config.js`.
+Storing all the env vars in one place and exporting them means you have one source of truth and can easily swap them out from one place instead of multiple files. Create a new file and name it `config.js`.
 
 ```js
 const dotenv = require("dotenv");
@@ -108,13 +108,13 @@ PGPORT=5432
 
 ### main.js
 
-Everything is in place and the script to seed the database can now be written. In a real-world scenario, you would perhaps have some data stored in a csv file that would be relevant to your database and application. This example will make use of the [faker library](https://github.com/Marak/Faker.js), as well as a few others. Install the following:
+In a real-world scenario, you would perhaps have some data stored in a csv file. This example will make use of the [faker library](https://github.com/Marak/Faker.js), and some other packages. Install the following:
 
 ```bash
 yarn add dotenv faker fast-csv fs minimist pg validator
 ```
 
-First up is the faker library. You'll use it by creating a function that will mimic the shape of the table set in the `schema.sql` file. It will return a template literal string to be added to a csv file later on.
+Use the Faker library by creating a function that will mimic the shape of the table set in `schema.sql`. It will return a template literal string to be added to a csv file later on.
 
 ```js
 const faker = require("faker");
@@ -129,7 +129,7 @@ function createTranslation() {
 }
 ```
 
-Next, you will need to import fs and create a stream. This will be used to write to an as yet non-existent csv file.
+Next, you will need to import fs and create a stream. This will write to an as yet non-existent csv file.
 
 ```js
 // other imports..
@@ -144,7 +144,7 @@ const output = "./src/output.csv";
 const stream = fs.createWriteStream(output);
 ```
 
-Enabling the user of the script to choose how many rows they would like to seed the database with is an extra and worthwhile step. The minimist package helps with parsing argument options. In the case of the script, it allows the user the option to pass in an amount, if the user chooses not to pass any additional arguments then you can set a default value. Create a new function that will write the fake data to the csv file.
+Enabling the user to choose how many rows they would like to seed the database with is an extra and worthwhile step. The `minimist` package helps with parsing argument options. In the case of the script, it allows the user the option to pass in an amount, if the user chooses not to pass any additional arguments then you can set a default value. Create a new function that will write the fake data to the csv file.
 
 ```js
 // other imports..
@@ -163,7 +163,7 @@ async function writeToCsvFile() {
 }
 ```
 
-Now that the csv file has been created and populated with fake data, you can begin the process of actually seeding that data into the Postgres database. Fast.csv is a library for parsing and formatting csv files. You'll use it in combination with the validator library and node-postgres.
+Now that the csv file is created and populated with fake data, you can begin the process of actually seeding that data into the Postgres database. `fast-csv` is a library for parsing and formatting csv files. You'll use it in combination with the `validator` library and `node-postgres`.
 
 ```js
 // other imports...
@@ -219,11 +219,11 @@ function insertFromCsv() {
 }
 ```
 
-The function first validates the contents of the row using the contains function from the validator library. This is necessary because some countries can have an extra comma in their name. An extra comma in a csv file equates to an extra column and the table created and defined in the `schema.sql` file dictates that only 3 columns will exist. If this check fails fast-csv will not accept the row and throw an event, which is used to print a message to the console to inform the user.
+The function first validates the contents of the row using the contains function from the `validator` library. This is necessary because some countries can have an extra comma in their name. An extra comma in a csv file equates to an extra column and the table created and defined in the `schema.sql` file dictates that only 3 columns will exist. If this check fails `fast-csv `will not accept the row and throw an event, which is used to print a message to the console to inform the user.
 
-If the row is accepted then it is added to an array. Once the parsing is finished and all the row data is added to the array the connection is established with the Postgres database. The data array is then iterated over, for each row in the array a client instance is acquired from the pool and an insert query is used as an argument, along with the row data. If the row is successfully inserted into the table then its corresponding data is printed to the console, if any errors occur they are also printed to the console. Finally the done function is called to release the clients back to the pool.
+If the row is accepted then it is added to an array. Once the parsing is finished and all the row data is added to the array the connection is established with the Postgres database. The data array is then iterated over, for each row in the array a client instance is acquired from the pool and an `INSERT` query is used as an argument, along with the row data. If the row is successfully inserted into the table then its corresponding data is printed to the console, if any errors occur they are also printed to the console. Finally, the done function is called to release the clients back to the pool.
 
-Putting this all together in one final function called seed where the data is written to the csv file, a stream is created to read the data from the output file and then the insert function is piped to the stream.
+The final function called seed is where the data is written to the csv file, a stream is created to read the data from the output file and then the `INSERT` function is piped to the stream.
 
 ```js
 // all the other code from main.js
@@ -237,7 +237,7 @@ async function seed() {
 seed();
 ```
 
-Finally, you can add two scripts to the `package.json` file. The first `create-db` will ask the user to login and connect to their Postgres database and then run the commands in the `schema.sql` file. The second script will run the first before running the seed function.
+Add two scripts to the `package.json` file. The first `create-db` will ask the user to login and connect to their Postgres database and then run the commands in the `schema.sql` file. The second script will run the first before running the seed function.
 
 The user may run the script with additional arguments to set the number of rows created in the table.
 
@@ -247,7 +247,7 @@ The user may run the script with additional arguments to set the number of rows 
 ```json
   "scripts": {
     "create-db": "psql -U postgres < schema.sql",
-    "seed": "yarn create-db && node src/main.js"
+    "seed": "yarn create-db && Node src/main.js"
   },
 ```
 
@@ -265,6 +265,14 @@ select *  from "translations";
 
 ## Final thoughts
 
-There are many ways this could have been accomplished, in fact, there are many libraries that support using node with Postgres. This method was chosen for its relative simplicity. It's not a generic solution that would fit all scenarios but it could most definitely be built upon to incorporate extra features. The function that creates the fake data could for example be added via config to match the schema definition of the table, it would also work quite nicely with a CLI, this would enable the end user much more configuration.
+There are many ways this could have been accomplished, in fact, there are many libraries that support using Node with Postgres. This method was chosen for its relative simplicity. It's not a generic solution that would fit all scenarios but it could be built upon to incorporate extra features.
 
-The use of the faker library for this example was befitting, but the data could also have been parsed from an external API. The upside of using the faker library is that it has lots of methods from which to configure the data and of course it means we don't have to actually run an external API request.
+### Positive take-aways
+
+- The fact that no external API was used for the data removed the overhead of having to make any requests.
+- Using Nodes inbuilt process.argv combined with a small parser library meant the user could add some level of configuration when seeding.
+
+### Possible improvements
+
+- The function that creates the fake data could be added via config to match the schema definition of the table.
+- It would also work quite nicely with a CLI, this would enable the end user much more configuration.
