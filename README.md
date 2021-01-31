@@ -16,3 +16,5 @@ Clone this repository and run `yarn` from the root. This project uses the defaul
 Set your environment variables by copying the values from the `.env.example` file into a newly created `.env` file. Change the values to match your local Postgres configuration.
 
 To create the default 10 rows run `yarn seed` from a terminal. To create a custom amount of rows run `yarn seed --rows=x` where `x` is the amount of rows you wish to create.
+
+Each time the script is run the database is dropped and re-created. To get a detailed run down of how the script works read the `guide.md` file.
