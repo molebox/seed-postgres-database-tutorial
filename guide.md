@@ -52,7 +52,7 @@ ALTER TABLE Translations
 
 ### db.js
 
-To interact with the Postgres database, you can install the [Node-postgres](https://Node-postgres.com/) package, a collection of modules made for interacting with Postgres. You'll use it to establish an initial connection to the database and insert some fake data. Create a new file `src/db.js` and add the following:
+To interact with the Postgres database, you can install the [node-postgres](https://node-postgres.com/) package, a collection of modules made for interacting with Postgres. You'll use it to establish an initial connection to the database and insert some fake data. Create a new file `src/db.js` and add the following:
 
 ```js
 const { Pool } = require("pg");
@@ -77,7 +77,7 @@ module.exports = {
 };
 ```
 
-The Pool class takes some optional config and the values passed in enable a connection with the database. They are set as environment variables (env vars) and imported from a separate config file. This file exports two functions. The query, which will be used to query the Postgres database and run an `INSERT` statement, and a connect function which will be used to connect to the database.
+The Pool class takes some optional config and the values passed in enable a connection with the database. They are set as environment variables (env vars) and imported from a separate config file. This file exports two functions. The query, which will be used to run an `INSERT` statement, and a connect function which will be used to connect to the database.
 
 ### config.js
 
