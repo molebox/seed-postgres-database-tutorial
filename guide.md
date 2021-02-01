@@ -6,10 +6,10 @@ This guide will walk through seeding a Postgres database. It will cover creating
 
 - You must have Postgres [installed on your machine](https://www.postgresql.org/download/)
 - You must have Node [installed on your machine](https://nodejs.org/en/download/)
-- It is assumed that you have Postgres setup and know-how to access its databases, though the guide will cover some basic commands.
+- It is assumed that you have Postgres setup and know-how to access its databases, though the guide will cover some basic commands towards the end.
 - This guide uses the default user `postgres` for accessing the database. If you have another user account you would prefer to use then swap in that.
 
-> This article uses version 13.1 of Postgres and version 14.15.1 of Node
+> The guide uses version 13.1 of Postgres and version 14.15.1 of Node. It was developed on a **Windows** machine.
 
 ## What do we mean by seed?
 

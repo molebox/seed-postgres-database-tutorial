@@ -9,7 +9,7 @@ To run the script locally ensure you have [Postgres](https://www.postgresql.org/
 - Node: 14.15.1
 - Postgres: 13.1
 
-> Note: This script uses the Faker library to populate the table and database defined in the `schema.sql` file.
+> Note: The script uses the Faker library to populate the table and database defined in the `schema.sql` file. It was developed on a **Windows** machine.
 
 ## Usage
 
@@ -19,6 +19,16 @@ Clone this repository and run `yarn` from the root. This project uses the defaul
 
 - Create a new `.env` file at the projects root
 - Copy the values from the `.env.example` file over and replace to match your local Postgres configuration.
+
+An example of how your env vars values might look:
+
+```env
+PGUSER=postgres
+PGHOST=localhost
+PGPASSWORD=test1234
+PGDATABASE=translationsdb
+PGPORT=5432
+```
 
 To create the default 10 rows in the table run `yarn seed` from a terminal. To create a custom amount of rows run `yarn seed --rows=x` where `x` is the number of rows you wish to create.
 
