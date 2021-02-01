@@ -2,7 +2,7 @@
 
 ## Preamble
 
-This repository has a node script for seeding a Postgres database ([src/main.js](src/main.js)) and a tutorial guide for writing the script ([guide.me](guide.me)).
+This repository has a node script for seeding a Postgres database ([src/main.js](src/main.js)) and a tutorial guide for writing the script ([guide.me](./guide.me)).
 
 To run the script locally ensure you have [Postgres](https://www.postgresql.org/download/) and [Nodejs](https://nodejs.org/en/download/) installed on your machine. This repo uses versions:
 
