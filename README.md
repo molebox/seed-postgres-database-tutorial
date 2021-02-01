@@ -30,6 +30,6 @@ PGDATABASE=translationsdb
 PGPORT=5432
 ```
 
-To create the default 10 rows in the table run `yarn seed` from a terminal. To create a custom amount of rows run `yarn seed --rows=x` where `x` is the number of rows you wish to create.
+To create the default 10 rows in the table run `yarn seed` from a terminal. To create a custom amount of rows run `yarn seed --rows=x` where `x` is the number of rows you wish to create. You will be asked to login to Postgres each time the script is run using the credentials in the `.env` file.
 
 > Note: Each time the script is run the database is dropped and re-created.
