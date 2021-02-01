@@ -2,14 +2,14 @@
 
 ## Preamble
 
-This repository has a node script for seeding a Postgres database ([src/main.js](src/main.js)) and a tutorial guide for writing the script ([guide.me](./guide.me)).
+This repository has a node script for seeding a Postgres database ([src/main.js](src/main.js)) and a tutorial guide for writing the script ([guide.md](./guide.md)).
 
 To run the script locally ensure you have [Postgres](https://www.postgresql.org/download/) and [Nodejs](https://nodejs.org/en/download/) installed on your machine. This repo uses versions:
 
 - Node: 14.15.1
 - Postgres: 13.1
 
-> Note: This script uses the Faker library to populate the table and database defined in the `schema.sql` file. 
+> Note: This script uses the Faker library to populate the table and database defined in the `schema.sql` file.
 
 ## Usage
 
