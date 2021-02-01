@@ -111,7 +111,7 @@ PGPORT=5432
 In a real-world scenario, you would perhaps have some data stored in a csv file. This example will make use of the [faker library](https://github.com/Marak/Faker.js), and some other packages. Install the following:
 
 ```bash
-yarn add dotenv faker fast-csv fs minimist pg validator
+yarn add dotenv faker fast-csv minimist pg validator
 ```
 
 Use the Faker library by creating a function that will mimic the shape of the table set in `schema.sql`. It will return a template literal string to be added to a csv file later on.

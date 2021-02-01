@@ -13,7 +13,6 @@
     "dotenv": "^8.2.0",
     "faker": "^5.2.0",
     "fast-csv": "^4.3.6",
-    "fs": "^0.0.1-security",
     "minimist": "^1.2.5",
     "pg": "^8.5.1",
     "validator": "^13.5.2"
